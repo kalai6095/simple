@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="default" extends="struts-default">
+        <action name="getTutorial" class="com.action.GetTutorialsAction">
+            <result name="success">/pages/rolePage.jsp</result>
+            <result name="failure">/pages/rolePage.jsp</result>
+        </action>
+        <action name="postTutorial" class="com.action.PostTutorialsAction">
+            <result name="success">/pages/rolePage.jsp</result>
+            <result name="failure">/pages/rolePage.jsp</result>
+        </action>
+
+    </package>
+
+
+   <!-- <package name="tutorials" namespace="/tutorials" extends="struts-default">
+        <action name="getTutorial" class="com.action.GetTutorialsAction">
+            <result name="success">/pages/rolePage.jsp</result>
+            <result name="failure">/pages/rolePage.jsp</result>
+        </action>
+
+    </package>-->
+</struts>
