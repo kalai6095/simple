@@ -5,24 +5,54 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
-    <package name="default" extends="struts-default">
+
+    <package name="login" namespace="/" extends="struts-default">
+        <action name="login" class="com.action.LoginAction">
+            <result name="success">/pages/search.jsp</result>
+            <result name="failure">/login.jsp</result>
+            <result name="input">/login.jsp</result>
+        </action>
+        <action name="ticketBook"
+                class="com.action.TicketAction" method="ticketBook">
+            <result name="success">/pages/ask.jsp</result>
+            <result name="input">/pages/TicketBook.jsp</result>
+        </action>
+
+        <action name="delete"
+                class="com.action.TicketAction" method="delete">
+            <result name="success">/pages/TicketBook.jsp</result>
+            <result name="input">/pages/TicketBook.jsp</result>
+        </action>
+        <action name="TicketAction" class="com.action.TicketAction">
+            <result name="input">pages/TicketBook.jsp</result>
+            <result name="success">pages/TicketBook.jsp</result>
+        </action>
+    </package>
+
+    <package name="default" namespace="/tutorial" extends="struts-default">
         <action name="getTutorial" class="com.action.GetTutorialsAction">
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/pages/rolePage.jsp</result>
             <result name="failure">/pages/rolePage.jsp</result>
         </action>
         <action name="postTutorial" class="com.action.PostTutorialsAction">
+            <interceptor-ref name="defaultStack"/>
             <result name="success">/pages/rolePage.jsp</result>
             <result name="failure">/pages/rolePage.jsp</result>
         </action>
-
+       <!-- <interceptors>
+            <interceptor name="session" class="com.interceptors.SessionInterceptors"/>
+        </interceptors>
+        <default-interceptor-ref name="defaultStack"/>
+        <default-class-ref class="com.opensymphony.xwork2.ActionSupport"/>-->
     </package>
 
 
-   <!-- <package name="tutorials" namespace="/tutorials" extends="struts-default">
-        <action name="getTutorial" class="com.action.GetTutorialsAction">
-            <result name="success">/pages/rolePage.jsp</result>
-            <result name="failure">/pages/rolePage.jsp</result>
-        </action>
+    <!-- <package name="tutorials" namespace="/tutorials" extends="struts-default">
+         <action name="getTutorial" class="com.action.GetTutorialsAction">
+             <result name="success">/pages/rolePage.jsp</result>
+             <result name="failure">/pages/rolePage.jsp</result>
+         </action>
 
-    </package>-->
+     </package>-->
 </struts>

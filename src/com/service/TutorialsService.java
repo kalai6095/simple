@@ -1,5 +1,6 @@
 package com.service;
 
+//import com.common.Testing;
 import com.dbconnection.DbConnection;
 import com.model.RoleInfo;
 import com.model.SubResource;
@@ -19,27 +20,30 @@ public class TutorialsService {
     public boolean storeRoleInfo(RoleInfo roleInfo) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        ResultSet rs=null;
+        ResultSet rs = null;
         String sql = "";
         try {
             DbConnection db = new DbConnection();
             conn = db.connect();
-
+            //Testing t = new Testing();
+            //t.getStrings();
             sql = "INSERT INTO role(`application`,`name`, `description`,`webpage`)VALUES(?,?,?,?);";
-            pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, roleInfo.getApplication());
             pstmt.setString(2, roleInfo.getName());
             pstmt.setString(3, roleInfo.getDescription());
             pstmt.setString(4, roleInfo.getResourceWebPage());
             pstmt.execute();
-            rs=pstmt.getGeneratedKeys();
-            int pk=0;
-            if(rs.next()) {
-                pk=rs.getInt(1);
-            }rs.close();
+            rs = pstmt.getGeneratedKeys();
+            int pk = 0;
+            if (rs.next()) {
+                pk = rs.getInt(1);
+            }
+            rs.close();
             pstmt.close();
-            Iterator<SubResource> itr=roleInfo.getSubResources().iterator();
-            while(itr.hasNext()){
+
+            Iterator<SubResource> itr = roleInfo.getSubResources().iterator();
+            while (itr.hasNext()) {
                 System.out.println("hai");
                 sql = "INSERT INTO resource(resourcename,isRead,isUpdate,roleId)VALUES(?,?,?,?);";
                 pstmt = conn.prepareStatement(sql);
@@ -66,6 +70,12 @@ public class TutorialsService {
         Set<SubResource> subResources = new HashSet<>();
         try {
             DbConnection db = new DbConnection();
+            int num = 4;
+            int i = 0;
+            while (i < num) {
+                System.out.println(i);
+                i++;
+            }
 
             conn = db.connect();
             System.out.println(conn.isClosed());
@@ -83,7 +93,7 @@ public class TutorialsService {
                 roleInfo.setName(rs.getString("name"));
                 roleInfo.setDescription(rs.getString("description"));
                 roleInfo.setResourceWebPage(rs.getString("webpage"));
-
+                roleInfo.setShowPermission(1);
                 sql2 = "SELECT * FROM resource WHERE roleId='" + pkid + "'";
                 rs2 = stmt2.executeQuery(sql2);
                 System.out.println(rs2.getRow());
@@ -103,7 +113,7 @@ public class TutorialsService {
             rs.close();
             stmt.close();
         } catch (Exception e) {
-            System.out.println("--------------some exp------------------------"+ e.getMessage());
+            System.out.println("--------------some exp------------------------" + e.getMessage());
         } finally {
             try {
                 if (conn != null) {

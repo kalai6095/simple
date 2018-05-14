@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="7753bb6b-986e-49ba-9472-07bd226f7c4e" name="kalaiselvana.info" url="http://kalaiselvana.info">
-        <fileTransfer host="kalaiselvana.info" port="22" rootFolder="/home/k23a88eysv7g " accessType="SFTP">
+        <fileTransfer host="kalaiselvana.info" port="22" rootFolder="/home/k23a88eysv7g/public_html/" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

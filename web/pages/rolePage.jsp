@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="import/bootstrap.min.css">
+    <link rel="stylesheet" href="/import/bootstrap.min.css">
     <style>
         .label {
             color: black !important;
@@ -34,6 +34,7 @@
             <s:textfield class="form-control" name="roleInfo.name" label="Name"/>
             <s:textfield class="form-control" name="roleInfo.description" label="Description"/>
             <s:textfield class="form-control" name="roleInfo.resourceWebPage" label="Resource Web Page"/>
+            <
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -46,23 +47,60 @@
                 <tbody>
 
                 <s:iterator value="roleInfo.subResources" status="sub" var="subres">
-                    <tr>  <s:if test = "#subres.isRead == true">
-                        afunck me
-                    </s:if>
-                        <td><s:textfield name="#subres.resourcename"></s:textfield></td>
-                        <td><s:checkbox name="#subres.isRead"></s:checkbox></td>
-                        <td><s:checkbox name="#subres.isUpdate"></s:checkbox></td>
-                        <td><s:property value="isDirty"></s:property></td>
+                    <tr>
+                        <TD>
+                            <s:textfield name="#subres.resourcename" ></s:textfield>
+                            <s:param name="#subres.resourcename"/>
+                        </TD>
+                        <TD>
+                            <s:set var="priIdx" value="1"/>
+                            <s:if test="roleInfo.showPermission==1 && priIdx==1">
+                                <input name="#subres.isread"/>
+                                <s:checkbox name="#subres.isRead"></s:checkbox>
+                                <s:checkbox name="#subres.isUpdate" disabled="true"></s:checkbox>
+                            </s:if>
+                            <s:else>
+                                <s:checkbox name="#subres.isRead"></s:checkbox>
+                                <s:checkbox name="#subres.isUpdate"></s:checkbox>
+                            </s:else>
+                        </TD>
+                        <TD>testing
+
+                        </TD>
+                        <TD><s:property value="isDirty"></s:property></TD>
                     </tr>
                 </s:iterator>
 
                 </tbody>
             </table>
+
+            <table class="table table-bordered" border="0" cellspacing="0" cellpadding="1">
+                <tr>
+                    <th>Days of the week</th>
+                    <th>Days of the week</th>
+                    <th>Days of the week</th>
+                </tr>
+
+                <s:iterator begin="0" end="10"  status="rowstatus">
+                    <tr>
+                        <s:if test="#rowstatus.odd == true">
+                            <td style="background: grey"><s:property/></td>
+                            <td style="background: red"><s:property value="#rowstatus"/></td>
+                            <td><s:textfield name="rowstatus"  /></td>
+                        </s:if>
+                        <s:else>
+                            <td><s:property/></td>
+                            <td><s:property value="#rowstatus"/></td>
+                        </s:else>
+                    </tr>
+                </s:iterator>
+            </table>
+
             <s:submit value="Submit"></s:submit>
         </s:form>
     </div>
 </fieldset>
-<script src="import/jquery.min.js"></script>
-<script src="import/bootstrap.min.js"></script>
+<script src="/import/jquery.min.js"></script>
+<script src="/import/bootstrap.min.js"></script>
 </body>
 </html>

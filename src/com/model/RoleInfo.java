@@ -8,7 +8,16 @@ public class RoleInfo {
     private String name;
     private String description;
     private String resourceWebPage;
+    private int showPermission;
     private Set<SubResource> subResources;
+
+    public int getShowPermission() {
+        return showPermission;
+    }
+
+    public void setShowPermission(int showPermission) {
+        this.showPermission = showPermission;
+    }
 
     public Integer getPkid() {
         return pkid;

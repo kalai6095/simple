@@ -9,6 +9,15 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Struts 2-2.5.14.1" />
+          <element id="directory" name="WEB-INF">
+            <element id="directory" name="classes">
+              <element id="module-output" name="hibernate" />
+              <element id="jpa-descriptors" facet="hibernate/jpa/JPA" />
+            </element>
+            <element id="directory" name="lib">
+              <element id="library" level="project" name="JPA 2.1-2.1" />
+            </element>
+          </element>
         </element>
       </element>
     </root>
