@@ -2,18 +2,30 @@ package com.action;
 
 import com.model.RoleInfo;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 import com.service.TutorialsService;
 
-public class GetTutorialsAction extends ActionSupport{
+public class EditRoleAction extends ActionSupport implements ModelDriven<RoleInfo>{
     private RoleInfo roleInfo = new RoleInfo();
+    private String key;
     private String testingString;
     public String execute(){
-        System.out.println("---------------------");
-        System.out.println("hai hellow how are you");
-        System.out.println("---------------------");
-        TutorialsService ts=new TutorialsService();
-        ts.getRessourceList(roleInfo);
+       TutorialsService ts=new TutorialsService();
+        ts.getRessourceList(roleInfo,key);
         return "success";
+    }
+
+    @Override
+    public RoleInfo getModel() {
+        return roleInfo;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public RoleInfo getRoleInfo() {

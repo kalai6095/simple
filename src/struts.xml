@@ -29,16 +29,21 @@
         </action>
     </package>
 
-    <package name="default" namespace="/tutorial" extends="struts-default">
-        <action name="getTutorial" class="com.action.GetTutorialsAction">
+    <package name="default" namespace="/role" extends="struts-default">
+        <action name="getRoles" class="com.action.GetRoleList">
             <interceptor-ref name="defaultStack"/>
-            <result name="success">/pages/rolePage.jsp</result>
+            <result name="success">/pages/rolePageList.jsp</result>
+            <result name="failure">/pages/rolePageList.jsp</result>
+        </action>
+        <action name="editRole" class="com.action.EditRoleAction">
+            <interceptor-ref name="defaultStack"/>
+            <result name="success">/pages/rolePage.jsp?key={$key}</result>
             <result name="failure">/pages/rolePage.jsp</result>
         </action>
-        <action name="postTutorial" class="com.action.PostTutorialsAction">
+        <action name="saveRole" class="com.action.SaveRoleAction">
             <interceptor-ref name="defaultStack"/>
-            <result name="success">/pages/rolePage.jsp</result>
-            <result name="failure">/pages/rolePage.jsp</result>
+            <result name="success" type="redirect">getRoles</result>
+            <result name="failure" type="redirect">getRoles</result>
         </action>
        <!-- <interceptors>
             <interceptor name="session" class="com.interceptors.SessionInterceptors"/>
@@ -49,8 +54,7 @@
 
 
     <!-- <package name="tutorials" namespace="/tutorials" extends="struts-default">
-         <action name="getTutorial" class="com.action.GetTutorialsAction">
-             <result name="success">/pages/rolePage.jsp</result>
+         <action name="getTutorial" class="com.action.EditRoleAction            <result name="success">/pages/rolePage.jsp</result>
              <result name="failure">/pages/rolePage.jsp</result>
          </action>
 

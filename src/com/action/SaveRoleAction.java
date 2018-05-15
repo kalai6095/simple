@@ -4,7 +4,7 @@ import com.model.RoleInfo;
 import com.opensymphony.xwork2.ActionSupport;
 import com.service.TutorialsService;
 
-public class PostTutorialsAction extends ActionSupport {
+public class SaveRoleAction extends ActionSupport {
     private RoleInfo roleInfo = new RoleInfo();
 
     public String execute() {

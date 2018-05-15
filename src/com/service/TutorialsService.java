@@ -8,6 +8,7 @@ import com.model.SubResource;
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 public class TutorialsService {
@@ -62,7 +63,7 @@ public class TutorialsService {
         return true;
     }
 
-    public void getRessourceList(RoleInfo roleInfo) {
+    public void getRessourceList(RoleInfo roleInfo,String key) {
         Connection conn = null;
         Statement stmt, stmt2 = null;
         ResultSet rs, rs2 = null;
@@ -70,23 +71,13 @@ public class TutorialsService {
         Set<SubResource> subResources = new HashSet<>();
         try {
             DbConnection db = new DbConnection();
-            int num = 4;
-            int i = 0;
-            while (i < num) {
-                System.out.println(i);
-                i++;
-            }
-
             conn = db.connect();
-            System.out.println(conn.isClosed());
-            System.out.println(conn.getClientInfo());
+
             stmt = conn.createStatement();
             stmt2 = conn.createStatement();
-            sql = "SELECT  * FROM role WHERE pkid=1";
+            sql = "SELECT  * FROM role WHERE pkid="+key;
             rs = stmt.executeQuery(sql);
-            System.out.println(rs.getRow());
             if (rs.next()) {
-                System.out.println(sql);
                 int pkid = rs.getInt("pkid");
                 roleInfo.setPkid(pkid);
                 roleInfo.setApplication(rs.getString("application"));
@@ -96,9 +87,7 @@ public class TutorialsService {
                 roleInfo.setShowPermission(1);
                 sql2 = "SELECT * FROM resource WHERE roleId='" + pkid + "'";
                 rs2 = stmt2.executeQuery(sql2);
-                System.out.println(rs2.getRow());
                 while (rs2.next()) {
-                    System.out.println(sql2);
                     SubResource sub = new SubResource();
                     sub.setResourcename(rs2.getString("resourcename"));
                     sub.setEnum_val(rs2.getInt("enumid"));
@@ -107,11 +96,11 @@ public class TutorialsService {
                     subResources.add(sub);
                 }
                 rs2.close();
-                stmt2.close();
                 roleInfo.setSubResources(subResources);
             }
             rs.close();
             stmt.close();
+            stmt2.close();
         } catch (Exception e) {
             System.out.println("--------------some exp------------------------" + e.getMessage());
         } finally {
@@ -124,5 +113,51 @@ public class TutorialsService {
             }
         }
 
+    }
+
+    public void getRoleList(List<RoleInfo> roleInfoList) {
+        Connection conn = null;
+        Statement stmt, stmt2 = null;
+        ResultSet rs, rs2 = null;
+        String sql, sql2 = "";
+        try {
+            DbConnection db = new DbConnection();
+            conn = db.connect();
+            stmt = conn.createStatement();
+            stmt2 = conn.createStatement();
+            sql = "SELECT  * FROM role";
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                int pkid = rs.getInt("pkid");
+                RoleInfo roleInfo=new RoleInfo();
+                roleInfo.setPkid(pkid);
+                roleInfo.setApplication(rs.getString("application"));
+                roleInfo.setName(rs.getString("name"));
+                roleInfo.setDescription(rs.getString("description"));
+                roleInfo.setResourceWebPage(rs.getString("webpage"));
+                roleInfo.setShowPermission(1);
+                /*Set<SubResource> subResources = new HashSet<>();
+                sql2 = "SELECT * FROM resource WHERE roleId='" + pkid + "'";
+                rs2 = stmt2.executeQuery(sql2);
+                while (rs2.next()) {
+                    SubResource sub = new SubResource();
+                    sub.setResourcename(rs2.getString("resourcename"));
+                    sub.setEnum_val(rs2.getInt("enumid"));
+                    sub.setRead(rs2.getBoolean("isRead"));
+                    sub.setUpdate(rs2.getBoolean("isUpdate"));
+                    subResources.add(sub);
+
+                }
+                rs2.close();
+                roleInfo.setSubResources(subResources);*/
+                roleInfoList.add(roleInfo);
+            }
+            rs.close();
+            stmt.close();
+            stmt2.close();
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 }
