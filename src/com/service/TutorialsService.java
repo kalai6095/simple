@@ -6,10 +6,7 @@ import com.model.RoleInfo;
 import com.model.SubResource;
 
 import java.sql.*;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TutorialsService {
 
@@ -68,7 +65,7 @@ public class TutorialsService {
         Statement stmt, stmt2 = null;
         ResultSet rs, rs2 = null;
         String sql, sql2 = "";
-        Set<SubResource> subResources = new HashSet<>();
+        List<SubResource> subResources = new ArrayList<>();
         try {
             DbConnection db = new DbConnection();
             conn = db.connect();

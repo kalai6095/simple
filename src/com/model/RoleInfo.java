@@ -1,5 +1,6 @@
 package com.model;
 
+import java.util.List;
 import java.util.Set;
 
 public class RoleInfo {
@@ -9,15 +10,7 @@ public class RoleInfo {
     private String description;
     private String resourceWebPage;
     private int showPermission;
-    private Set<SubResource> subResources;
-
-    public int getShowPermission() {
-        return showPermission;
-    }
-
-    public void setShowPermission(int showPermission) {
-        this.showPermission = showPermission;
-    }
+    private List<SubResource> subResources;
 
     public Integer getPkid() {
         return pkid;
@@ -59,11 +52,19 @@ public class RoleInfo {
         this.resourceWebPage = resourceWebPage;
     }
 
-    public Set<SubResource> getSubResources() {
+    public int getShowPermission() {
+        return showPermission;
+    }
+
+    public void setShowPermission(int showPermission) {
+        this.showPermission = showPermission;
+    }
+
+    public List<SubResource> getSubResources() {
         return subResources;
     }
 
-    public void setSubResources(Set<SubResource> subResources) {
+    public void setSubResources(List<SubResource> subResources) {
         this.subResources = subResources;
     }
 }

@@ -35,9 +35,9 @@
                         <s:hidden name="roleInfo.pkid"></s:hidden>
                         <s:textfield class="form-control" name="roleInfo.application" label="Application"/>
 
-                        <s:textfield class="form-control" name="name" label="Name"/>
-                        <s:textfield class="form-control" name="description" label="Description"/>
-                        <s:textfield class="form-control" name="resourceWebPage" label="Resource Web Page"/>
+                        <s:textfield class="form-control" name="roleInfo.name" label="Name"/>
+                        <s:textfield class="form-control" name="roleInfo.description" label="Description"/>
+                        <s:textfield class="form-control" name="roleInfo.resourceWebPage" label="Resource Web Page"/>
 
                         <table class="table table-bordered">
                             <thead>
@@ -48,22 +48,23 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <s:iterator value="subResources" status="sub" var="subres" >
+                            <s:iterator value="roleInfo.subResources" status="sub" var="subres" >
                                 <tr>
                                     <td><s:property value="#sub.index+1"/></td>
                                     <td>
-                                        <s:textfield  cssClass="form-control" name="resourcename"
+                                        <s:textfield  cssClass="form-control" name="roleInfo.subResources[#sub.index].resourcename"
                                                      theme="simple"/>
+                                        <s:property value="resourcename"/>name
                                     </td>
                                     <td>
                                         <s:set var="priIdx" value="1"/>
                                         <s:if test="showPermission==1 && priIdx==1">
-                                            <s:checkbox name="isRead" value="true" theme="simple"/> Read
-                                            <s:checkbox name="isUpdate" value="true" disabled="true" theme="simple"/>Update
+                                            <s:checkbox name="roleInfo.subResources[#sub.index].isRead"  theme="simple"/> Read
+                                            <s:checkbox name="roleInfo.subResources[#sub.index].isUpdate"  disabled="true" theme="simple"/>Update
                                         </s:if>
                                         <s:else>
-                                            <s:checkbox name="isRead" value="true" theme="simple"/>Read
-                                            <s:checkbox name="isUpdate" value="true" theme="simple"/>Update
+                                            <s:checkbox name="roleInfo.subResources[#sub.index].isRead" theme="simple"/>Read
+                                            <s:checkbox name="roleInfo.subResources[#sub.index].isUpdate" theme="simple"/>Update
                                         </s:else>
                                     </td>
                                 </tr>
