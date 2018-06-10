@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="x" uri="/custom-tag"%>
 <html>
 <head>
     <title>Title</title>
@@ -31,6 +32,11 @@
             </div>
             <div class="panel-body">
                 <div class="col-md-12">
+                    <x:custom-tag cssClass="btn btn-sm btn-primary"></x:custom-tag>
+                    <hr/>
+                    new tag
+                    <x:cust cssClass="btn btn-sm btn-warning" subrespermission="1" />
+
                     <s:form class="myform" action="saveRole" method="POST">
                         <s:hidden name="roleInfo.pkid"></s:hidden>
                         <s:textfield class="form-control" name="roleInfo.application" label="Application"/>
